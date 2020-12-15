@@ -1,8 +1,8 @@
+robots.txt
 account.html
 account.php
 adm/
-robots.txt
-administrator/
+administrator
 wp-admin/
 adm/admloginuser.php
 adm_auth.php

@@ -1,11 +1,11 @@
 import requests
 
-print("Subdiry by Sociedad. Tools para sitios web.")
+print("Subdiry by Sociedad. Tools para sitios web. (No funciona bien en algunos sitios)")
 print("")
 website = input("URL del sitio web (Incluir http:// o https:// al comienzo): ")
 
-if website.count("/") == 2:
-    website = website + "/"
+if website.count("/") != 2:
+    website = website[0:-1]
 
 if website.count(" ") != 0:
     print("")
@@ -15,11 +15,15 @@ if website.count(" ") != 0:
 def subdirectories():
     file = open("subdiry", "r")
     filecontent = file.readlines()
+    leng = len(filecontent)
     print("Escaneando " + website)
-    for i in range(len(filecontent)):
-        requested = requests.get(website + filecontent[i])
+    file.close()
+    file2 = open("subdiry","r")
+    for lines in range(leng):
+        line = file2.readline()
+        requested = requests.get(website + "/" + line)
         if requested.ok:
-            print(str(requested) + ": " + filecontent[i])
+            print(str(requested) + ": " + line)
 
 def ping():
     print("Mandando conexion a " + website)
@@ -57,8 +61,8 @@ while salir == False:
         guia()
     if respuesta == "U":
         website = input("Nueva URL: ")
-        if website.count("/") == 2:
-            website = website + "/"
+        if website.count("/") != 2:
+            website = website[0:-2]
         if website.count(" ") != 0:
             print("URL mal puesta.")
             break
